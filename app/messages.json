@@ -1,0 +1,12 @@
+[
+    {
+        "name" : "vivek",
+        "age" : 25,
+        "city" : "bangalore"
+    },
+    {
+        "name":"super",
+        "age":25,
+        "city":"hyderabad"
+    }
+]
