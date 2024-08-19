@@ -1,4 +1,4 @@
-// File: D:\Vivek\groceryStore\my-app\app\page.js
+// File: /workspaces/GroceryStore/app/page.js
 import * as entry from '../../../app/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 
