@@ -1,5 +1,6 @@
 "use client"
 import React, { useState } from 'react';
+
 const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const totalPrice = (product.price * quantity).toFixed(2);
@@ -16,26 +17,29 @@ const ProductCard = ({ product }) => {
     alert(`Added ${quantity} of ${product.title} to the cart!`);
   };
 
-  return (<>
+  return (
     <div
       className="product-card w-64 h-72 p-4 bg-white shadow-lg rounded-lg flex flex-col transition-transform transform hover:scale-105 hover:shadow-2xl"
       style={{
         border: '2px solid #71eb34',
         boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)', // Enhanced shadow effect
         transition: 'all 0.3s ease-in-out' // Smooth transition for all properties
-    }}
+      }}
     >
       <div className="flex-grow flex items-center justify-center">
         <img 
           src={product.image} 
           alt={product.title} 
-          className="w-36 h-32 object-cover rounded-t-lg"
+          className="w-32 h-28 object-contain rounded-t-lg"
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%'
+          }}
         />
       </div>
       <h2 className="text-lg font-bold text-gray-800 mt-2 text-center">{product.title}</h2>
       <p className="text-xl font-semibold mt-2 text-center" style={{ color: '#71eb34' }}>
-      ₹
-      {totalPrice}
+        ₹{totalPrice}
       </p>
       <div className="flex items-center mt-2 justify-between font-bold">
         <div className="text-gray-700">Quantity</div>
@@ -66,7 +70,6 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
     </div>
-     </>
   );
 };
 

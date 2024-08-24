@@ -5,22 +5,22 @@ const PopularProducts = () => {
   const items = [
     {
       title: 'Apple',
-      image: 'apple.jpg',
+      image: 'apple.png',
       price: 1.99,
     },
     {
       title: 'Banana',
-      image: 'banana.jpg',
+      image: 'banana.png',
       price: 0.99,
     },
     {
       title: 'Carrot',
-      image: 'carrot.jpg',
+      image: 'carrot.png',
       price: 0.79,
     },
     {
       title: 'Broccoli',
-      image: 'broccoli.jpg',
+      image: 'brocoli.jpg',
       price: 2.49,
     },
     // Add more items as needed
@@ -36,23 +36,23 @@ const PopularProducts = () => {
     },
     {
       title: 'Carrot',
-      image: 'carrot.jpg',
+      image: 'https://res.cloudinary.com/dx1rpbut6/image/upload/v1724341353/app_prdert.ico',
       price: 0.79,
     },
     {
       title: 'Broccoli',
-      image: 'broccoli.jpg',
+      image: 'https://res.cloudinary.com/dx1rpbut6/image/upload/v1724340788/cld-sample-5.jpg',
       price: 2.49,
     },
     // Add more items as needed
     {
       title: 'Apple',
-      image: 'apple.jpg',
+      image: 'https://res.cloudinary.com/dx1rpbut6/image/upload/v1724340788/cld-sample-4.jpg',
       price: 1.99,
     },
     {
       title: 'Banana',
-      image: 'banana.jpg',
+      image: 'https://res.cloudinary.com/dx1rpbut6/image/upload/v1724340786/samples/coffee.jpg',
       price: 0.99,
     },
     {
@@ -68,7 +68,7 @@ const PopularProducts = () => {
     // Add more items as needed
     {
       title: 'Apple',
-      image: 'apple.jpg',
+      image: 'apple.png',
       price: 1.99,
     },
     {
@@ -98,11 +98,7 @@ const PopularProducts = () => {
         {items.map((item, index) => (
           <ProductCard
             key={index}
-            product={{
-              title: item.title,
-              image: item.image,
-              price: item.price,
-            }}
+            product={item}
           />
         ))}
       </div>

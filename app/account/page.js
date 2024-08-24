@@ -1,6 +1,6 @@
 "use client"
-import React, { useState } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import Cookie from 'js-cookie'
 const initialPastPurchases = [
   { id: 1, title: 'Apple', price: 30, date: '2024-08-01', status: 'Delivered' },
   { id: 2, title: 'Banana', price: 20, date: '2024-08-05', status: 'Pending' },
@@ -9,7 +9,18 @@ const initialPastPurchases = [
 ];
 
 const ProfilePage = () => {
+  const [username,setusername] = useState("")
+  const [email, setEmail] = useState("")
   const [pastPurchases, setPastPurchases] = useState(initialPastPurchases);
+
+  useEffect(() => {
+    const cookieUser = Cookie.get("user")
+    if (cookieUser) {
+      const { username, email } = JSON.parse(cookieUser);
+      setusername(username);
+      setEmail(email);
+    }
+  }, [])
 
   const handleCancelOrder = (id) => {
     // Simulate cancel order process
@@ -29,8 +40,8 @@ const ProfilePage = () => {
             U
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-gray-800">user</h2>
-            <p className="text-gray-600">user@example.com</p>
+            <h2 className="text-xl font-bold text-gray-800">Welcome!! {username}</h2>
+            <p className="text-gray-600">{email}</p>
           </div>
         </div>
       </div>
