@@ -24,6 +24,10 @@ const ProductSchema = new mongoose.Schema({
     price:{
         type: 'number',
         required: true
+    },
+    popular:{
+        type: 'boolean',
+        default: false
     }
 })
 

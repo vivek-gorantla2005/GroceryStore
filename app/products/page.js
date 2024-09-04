@@ -1,41 +1,40 @@
-import React from 'react';
+"use client"
+import React, { useEffect, useState } from 'react';
 import ProductCard from '../_components/ProductCard';
 
-const page = () => {
-  // Sample products array
-  const products = [
-    {
-      title: 'Apple',
-      image: '/apple.png',
-      price: 1.99,
-    },
-    {
-      title: 'Banana',
-      image: '/banana.png',
-      price: 0.99,
-    },
-    {
-      title: 'Carrot',
-      image: '/images/carrot.jpg',
-      price: 0.79,
-    },
-    {
-      title: 'Broccoli',
-      image: '/images/broccoli.jpg',
-      price: 1.49,
-    },
-    {
-      title: 'Orange',
-      image: '/images/orange.jpg',
-      price: 1.29,
-    },
-    {
-      title: 'Strawberry',
-      image: '/images/strawberry.jpg',
-      price: 2.99,
-    },
-    // Add more products as needed
-  ];
+const ProductsPage = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch('/api/getproducts');
+        if (res.ok) {
+          const { body: data } = await res.json();
+          console.log(JSON.stringify(data));
+          setProducts(data);
+        } else {
+          console.error("Error fetching products");
+        }
+      } catch (err) {
+        console.error("An error occurred: ", err);
+      } finally {
+        setLoading(false); // Set loading to false once data is fetched
+      }
+    };
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center mt-32 h-screen">
+        <div className="animate-spin rounded-full h-32 w-32 border-t-4 border-green-600" role="status">
+          <span className="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -49,4 +48,4 @@ const page = () => {
   );
 }
 
-export default page;
+export default ProductsPage;

@@ -5,13 +5,9 @@ const ProductCard = ({ product }) => {
   const [quantity, setQuantity] = useState(1);
   const totalPrice = (product.price * quantity).toFixed(2);
 
-  const handleIncreaseQuantity = () => {
-    setQuantity(prevQuantity => prevQuantity + 1);
-  };
+  const handleIncreaseQuantity = () => setQuantity(prevQuantity => prevQuantity + 1);
 
-  const handleDecreaseQuantity = () => {
-    setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1)); // Prevents quantity from going below 1
-  };
+  const handleDecreaseQuantity = () => setQuantity(prevQuantity => Math.max(prevQuantity - 1, 1));
 
   const handleAddToCart = () => {
     alert(`Added ${quantity} of ${product.title} to the cart!`);
@@ -22,8 +18,8 @@ const ProductCard = ({ product }) => {
       className="product-card w-64 h-72 p-4 bg-white shadow-lg rounded-lg flex flex-col transition-transform transform hover:scale-105 hover:shadow-2xl"
       style={{
         border: '2px solid #71eb34',
-        boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)', // Enhanced shadow effect
-        transition: 'all 0.3s ease-in-out' // Smooth transition for all properties
+        boxShadow: '0 6px 12px rgba(0, 0, 0, 0.3)',
+        transition: 'all 0.3s ease-in-out'
       }}
     >
       <div className="flex-grow flex items-center justify-center">
@@ -65,7 +61,7 @@ const ProductCard = ({ product }) => {
           className="w-10 h-10 flex items-center justify-center rounded-full text-white font-bold transition-colors duration-200 hover:bg-green-700"
         >
           <span className="text-lg">
-            <img src="cart.svg" alt="addtocart" />
+            <img src="cart.svg" alt="add to cart" />
           </span>
         </button>
       </div>

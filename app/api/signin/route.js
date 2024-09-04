@@ -22,7 +22,6 @@ export async function POST(req) {
         const newUser = new User({ ...body, password: hashedPassword });
         await newUser.save();
 
-        // Ensure JWT_SECRET is defined
         if (!process.env.JWT_SECRET) {
             throw new Error("JWT_SECRET is not defined");
         }
@@ -30,18 +29,26 @@ export async function POST(req) {
         const token = jwt.sign(
             { email: body.email, username: body.username },
             process.env.JWT_SECRET,
-            { expiresIn: '7d' }
+            { expiresIn: '7d' } 
         );
 
-        return NextResponse.json({
+        // Set the token as an HTTP-only cookie
+        const response = NextResponse.json({
             message: "User created successfully",
             user: {
                 email: body.email,
                 username: body.username
-            },
-            token: token
-        },
-        { status: 200 });
+            }
+        }, { status: 200 });
+
+        response.cookies.set('auth-token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === 'production', // Set to true in production
+            maxAge: 7 * 24 * 60 * 60, // 7 days in seconds
+            path: '/' // Available on all routes
+        });
+
+        return response;
 
     } catch (err) {
         console.error(err);

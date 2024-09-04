@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./_components/Navbar";
+import Script from "next/script";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
@@ -11,8 +13,12 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <Script src="https://cdn.botpress.cloud/webchat/v2.1/inject.js" strategy="afterInteractive" />
+        <Script src="https://mediafiles.botpress.cloud/86fc029f-9374-4128-9708-a6a1af985e27/webchat/v2.1/config.js" strategy="afterInteractive" />
+      </head>
       <body className={inter.className}>
-        <Navbar/>
+        <Navbar />
         {children}
       </body>
     </html>

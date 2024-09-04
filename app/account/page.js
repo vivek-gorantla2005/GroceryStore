@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import Cookie from 'js-cookie'
+import Link from 'next/link';
 const initialPastPurchases = [
   { id: 1, title: 'Apple', price: 30, date: '2024-08-01', status: 'Delivered' },
   { id: 2, title: 'Banana', price: 20, date: '2024-08-05', status: 'Pending' },
@@ -11,14 +12,16 @@ const initialPastPurchases = [
 const ProfilePage = () => {
   const [username,setusername] = useState("")
   const [email, setEmail] = useState("")
+  const [role,setrole] = useState("")
   const [pastPurchases, setPastPurchases] = useState(initialPastPurchases);
 
   useEffect(() => {
     const cookieUser = Cookie.get("user")
     if (cookieUser) {
-      const { username, email } = JSON.parse(cookieUser);
+      const { username, email,role } = JSON.parse(cookieUser);
       setusername(username);
       setEmail(email);
+      setrole(role)
     }
   }, [])
 
@@ -42,6 +45,7 @@ const ProfilePage = () => {
           <div>
             <h2 className="text-xl font-bold text-gray-800">Welcome!! {username}</h2>
             <p className="text-gray-600">{email}</p>
+            <p className='text-gray-600'>{role}</p>
           </div>
         </div>
       </div>

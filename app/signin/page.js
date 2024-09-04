@@ -2,45 +2,61 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import Cookies from 'js-cookie'
-const SignInPage =()=> {
+import { Button } from "@/components/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu"
+
+const SignInPage = () => {
   const router = useRouter()
-  const [username,setusername] = useState("")
-  const [email,setEmail] = useState("")
-  const [password,setPassword] = useState("")
-  const [confirmPassword,setConfirmPassword] = useState("")
-  const handlesubmit = async(e)=>{
+  const [username, setusername] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [role, setrole] = useState("Select Role")
+
+  const handlesubmit = async (e) => {
     e.preventDefault()
-    if(password!==confirmPassword){
+
+    if (password !== confirmPassword) {
       alert("Passwords do not match!")
-      return;
+      return
     }
 
-    try{
-      const res = await fetch("/api/signin",{
+    try {
+      const res = await fetch("/api/signin", {
         method: "POST",
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({username, email,password}),
+        body: JSON.stringify({ username, email, password, role }),
       })
 
-      const data = await res.json()
-      if(res.ok){
+      if (res.ok) {
         router.push("/login")
-      }else if(res.status === 400){
+      } else if (res.status === 400) {
         router.push("/account")
       }
-    }catch(err){
-      console.log("account creation failed",err)
+
+      if(res.status === 400){
+        router.push("/login")
+      }
+    } catch (err) {
+      console.log("Account creation failed", err)
     }
 
-    console.log("User data:", {username, email, password, confirmPassword})
     setusername("")
     setEmail("")
     setPassword("")
     setConfirmPassword("")
   }
+
   return (
     <div className="flex items-center justify-center">
       <div
@@ -61,8 +77,8 @@ const SignInPage =()=> {
             placeholder='Enter your username'
             className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500'
             style={{ borderColor: '#71eb34' }}
-            value = {username}
-            onChange={(e)=>setusername(e.target.value)}
+            value={username}
+            onChange={(e) => setusername(e.target.value)}
           />
           <input
             type="text"
@@ -72,7 +88,7 @@ const SignInPage =()=> {
             className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500'
             style={{ borderColor: '#71eb34' }}
             value={email}
-            onChange={(e)=>setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
           <input
             type="password"
@@ -82,7 +98,7 @@ const SignInPage =()=> {
             className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500'
             style={{ borderColor: '#71eb34' }}
             value={password}
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <input
             type="password"
@@ -92,8 +108,24 @@ const SignInPage =()=> {
             className='w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500'
             style={{ borderColor: '#71eb34' }}
             value={confirmPassword}
-            onChange={(e)=>setConfirmPassword(e.target.value)}
+            onChange={(e) => setConfirmPassword(e.target.value)}
           />
+
+          <DropdownMenu style={{borderColor:"#71eb34"}} className='w-full px-4 py-2 border border-gray-300  rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500'>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="text-gray-400 w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500 ">{role}</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel className='text-gray-600'>Select Your Role</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuRadioGroup className='text-gray-400' value={role} onValueChange={setrole} >
+                <DropdownMenuRadioItem value="customer">Customer</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="farmer">Farmer</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="seller">Seller</DropdownMenuRadioItem>
+                <DropdownMenuRadioItem value="insuranceprovider">Insurance Provider</DropdownMenuRadioItem>
+              </DropdownMenuRadioGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
 
           <button
             type="submit"
@@ -106,7 +138,7 @@ const SignInPage =()=> {
           {/* Link Section */}
           <div className='text-center mt-4'>
             <Link href="/login" className='hover:underline'>
-              <p style={{ color: '#71eb34' }}>Already have account? Login</p>
+              <p style={{ color: '#71eb34' }}>Already have an account? Login</p>
             </Link>
           </div>
         </form>
