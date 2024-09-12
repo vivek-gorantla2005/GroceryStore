@@ -7,13 +7,13 @@ const Navbar = () => {
         <>
             <nav className="flex m-0 p-0 justify-between items-center">
                 <div className='flex pl-5'>
-                    <div className="logo">
+                    {/* <div className="logo">
                         <img src="logo.png" alt="logo" width={150} height={100} />
-                    </div>
+                    </div> */}
                     <div className="ml-2">
                         <video
-                            src="GroceryStore.mp4"
-                            className="w-40 h-32 object-cover"
+                            src="logo2.mp4"
+                            className="w-52 h-32 object-cover"
                             loop
                             muted
                             autoPlay
@@ -31,6 +31,12 @@ const Navbar = () => {
                         <li className='flex items-center gap-1 px-4 py-2 rounded-md border border-transparent hover:border-gray-300 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-105 cursor-pointer'>
                             Products
                             <img src="discount.svg" alt="discount" className='w-6 h-6 fill-current text-black' />
+                        </li>
+                        </Link>
+                        <Link href={"/marketplace"}>
+                        <li className='flex items-center gap-1 px-4 py-2 rounded-md border border-transparent hover:border-gray-300 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-105 cursor-pointer'>
+                            MarketPlace
+                            <img src="marketplace.svg" alt="account" className='w-6 h-6 fill-current text-black' />
                         </li>
                         </Link>
                         <Link href="/cart">
@@ -51,6 +57,19 @@ const Navbar = () => {
                             <img src="account.svg" alt="account" className='w-6 h-6 fill-current text-black' />
                         </li>
                         </Link>
+                        <Link href={"/farmer_negotiate"}>
+                        <li className='flex items-center gap-1 px-4 py-2 rounded-md border border-transparent hover:border-gray-300 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-105 cursor-pointer'>
+                            farmer
+                            <img src="account.svg" alt="account" className='w-6 h-6 fill-current text-black' />
+                        </li>
+                        </Link>
+                        <Link href={"/buyer_negotiate"}>
+                        <li className='flex items-center gap-1 px-4 py-2 rounded-md border border-transparent hover:border-gray-300 hover:text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-transform transform hover:scale-105 cursor-pointer'>
+                            buyer
+                            <img src="account.svg" alt="account" className='w-6 h-6 fill-current text-black' />
+                        </li>
+                        </Link>
+                        
                     </ul>
                 </div>
             </nav>

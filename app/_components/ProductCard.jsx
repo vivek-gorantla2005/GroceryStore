@@ -34,6 +34,7 @@ const ProductCard = ({ product }) => {
         />
       </div>
       <h2 className="text-lg font-bold text-gray-800 mt-2 text-center">{product.title}</h2>
+      <p >{product.description}</p>
       <p className="text-xl font-semibold mt-2 text-center" style={{ color: '#71eb34' }}>
         ₹{totalPrice}
       </p>
